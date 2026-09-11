@@ -85,7 +85,7 @@
     .result-kicker { text-align: center; margin-bottom: 22px; }
     .card-heading { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 24px; }
     .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .avatar-frame { min-height: 350px; aspect-ratio: 4/5; border-radius: 20px; background: linear-gradient(135deg, #e9e2f4, #deeeeb); overflow: hidden; position: relative; }
+    .avatar-frame { aspect-ratio: 1; border-radius: 20px; background: transparent; overflow: hidden; position: relative; }
     .result-avatar { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: contain; object-position: center bottom; }
     .result-name { margin: 5px 0 10px; }
     .result-title { margin-bottom: 12px; font-weight: 700; }
@@ -151,8 +151,8 @@
         <button id="start-button" class="primary" type="button">開始尋找心動 ↗</button>
       </div>
       <div class="photo-stack">
-        <figure><img src="images/graha.png" alt="古拉哈提亞"><figcaption>A LITTLE ADVENTURE</figcaption></figure>
-        <figure><img src="images/themis.png" alt="特彌斯"><figcaption>A QUIET PROMISE</figcaption></figure>
+        <figure><img src="images/graha.webp" alt="古拉哈提亞"><figcaption>A LITTLE ADVENTURE</figcaption></figure>
+        <figure><img src="images/themis.webp" alt="特彌斯"><figcaption>A QUIET PROMISE</figcaption></figure>
       </div>
     </section>
 
@@ -1981,7 +1981,7 @@
       winnerIndex = index;
       const profile = getProfile();
       const character = profile.character;
-      byId('result-avatar').src = 'images/' + character.key + '.png';
+      byId('result-avatar').src = 'images/' + character.key + '.webp';
       byId('result-avatar').alt = character.name;
       byId('result-name').textContent = character.name;
       byId('result-english').textContent = character.en;
