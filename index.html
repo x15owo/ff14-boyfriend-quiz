@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eee7fa">
+  <title>FF14 中最適合的男朋友｜心動光譜</title>
+  <!-- 分享圖片套件從 CDN 載入；網站本身的程式都寫在這份 HTML。 -->
+  <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    /* ===== 1. 全站配色與共用元件 ===== */
+    :root {
+      --ink: #353044;
+      --muted: #71677e;
+      --accent: #765599;
+      --line: #e1d7eb;
+      --paper: #fffdfd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font: 16px/1.8 "Microsoft JhengHei", sans-serif;
+      background: radial-gradient(at 10% 10%, #fbe1e8, transparent 55%),
+                  radial-gradient(at 90% 40%, #dcedea, transparent 55%), #f2ecfa;
+      min-height: 100vh;
+    }
+    [hidden] { display: none !important; }
+    button { font: inherit; cursor: pointer; color: inherit; }
+    button:disabled { opacity: .5; cursor: default; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2 { font-family: "Noto Serif TC", "PMingLiU", serif; line-height: 1.4; }
+    h1 { font-size: clamp(2.3rem, 5vw, 4rem); }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+    h3 { font-size: 1rem; }
+    .container { width: min(980px, calc(100% - 32px)); margin: auto; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; }
+    .brand { font-weight: 800; letter-spacing: .15em; }
+    .eyebrow { font-size: .78rem; letter-spacing: .15em; color: var(--accent); }
+    .progress-area { position: sticky; top: 0; z-index: 2; background: #f5eff9f5; padding: 12px 0; }
+    .progress-row { display: flex; align-items: center; gap: 16px; font-size: .8rem; }
+    progress { flex: 1; height: 7px; accent-color: var(--accent); border: 0; border-radius: 20px; overflow: hidden; }
+    progress::-webkit-progress-bar { background: #e3dbea; }
+    progress::-webkit-progress-value { background: linear-gradient(90deg, #ba8caf, #8063a3); transition: width .2s; }
+    main { padding: 40px 0 60px; }
+    .primary, .secondary { border-radius: 14px; padding: 13px 24px; min-height: 50px; font-weight: 700; }
+    .primary { color: white; background: var(--ink); border: 1px solid var(--ink); }
+    .secondary { background: #fffafc; border: 1px solid var(--line); }
+    button { transition: background .2s, transform .2s; }
+    button:hover:not(:disabled) { transform: translateY(-2px); }
+    .tag { display: inline-block; padding: 4px 12px; border-radius: 30px; background: #eee5f5; font-size: .85rem; margin: 4px 5px 4px 0; }
+    .card { background: var(--paper); padding: 32px; border: 1px solid white; border-radius: 26px; box-shadow: 0 24px 65px #62507819; }
+    .enter { animation: appear .25s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== 2. 首頁 ===== */
+    .intro-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 36px; align-items: center; min-height: 520px; }
+    .intro-layout h1 { margin: 16px 0 22px; }
+    .intro-layout h1 span { color: var(--accent); }
+    .intro-description { color: var(--muted); margin-bottom: 20px; }
+    #start-button { margin-top: 24px; min-width: 220px; }
+    .photo-stack { height: 390px; position: relative; }
+    .photo-stack figure { position: absolute; width: 59%; margin: 0; padding: 10px; background: white; border-radius: 18px; box-shadow: 0 18px 45px #66557728; }
+    .photo-stack figure:first-child { left: 0; top: 0; transform: rotate(-9deg); }
+    .photo-stack figure:last-child { right: 0; bottom: 0; transform: rotate(8deg); }
+    .photo-stack img { width: 100%; display: block; border-radius: 12px; }
+    .photo-stack figcaption { text-align: center; font: .72rem/2.7 Georgia, serif; letter-spacing: .14em; }
+
+    /* ===== 3. 題目與二選一加時賽 ===== */
+    #quiz-view { max-width: 760px; margin: auto; }
+    .question-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    #question-number { font: 2.5rem Georgia, serif; color: #b6a6c6; margin-bottom: 20px; }
+    #question-title { margin-bottom: 28px; }
+    .options { display: grid; gap: 12px; }
+    .option { width: 100%; display: flex; align-items: center; gap: 16px; text-align: left; background: white; border: 1px solid var(--line); border-radius: 15px; padding: 18px; min-height: 76px; }
+    .option:hover:not(:disabled), .option.selected { background: #eee6f7; border-color: #aa8ec0; }
+    .letter { display: grid; place-items: center; flex: 0 0 30px; height: 30px; border-radius: 50%; background: #f2edf6; color: var(--accent); }
+    #back-button { margin-top: 20px; }
+    dialog { border: 0; width: min(630px, calc(100% - 32px)); padding: 30px; border-radius: 24px; color: var(--ink); background: var(--paper); max-height: 90vh; overflow: auto; }
+    dialog::backdrop { background: #30273c80; }
+    dialog h2, dialog p { margin-bottom: 20px; }
+
+    /* ===== 4. 結果與分享卡 ===== */
+    .result-kicker { text-align: center; margin-bottom: 22px; }
+    .card-heading { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 24px; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .avatar-frame { min-height: 350px; aspect-ratio: 4/5; border-radius: 20px; background: linear-gradient(135deg, #e9e2f4, #deeeeb); overflow: hidden; position: relative; }
+    .result-avatar { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: contain; object-position: center bottom; }
+    #result-name { margin: 5px 0 10px; }
+    #result-title { margin-bottom: 12px; font-weight: 700; }
+    #radar { display: block; width: 100%; height: auto; margin-top: 12px; }
+    .legend { font-size: .75rem; text-align: center; color: var(--muted); }
+    .legend span:first-child { color: #80569f; }
+    .legend span:last-child { color: #527e71; }
+    .axis-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; font-size: .75rem; margin-top: 12px; }
+    .reason-panel { background: linear-gradient(110deg, #eee7f7, #ebf3ef); padding: 22px; border-radius: 18px; margin: 24px 0; }
+    .reason-panel h3 { margin: 5px 0 10px; }
+    .analysis-block { margin-top: 20px; }
+    .analysis-block h3 { color: var(--accent); margin-bottom: 7px; }
+    .analysis-block p { font-size: .95rem; }
+    .actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+    #status { text-align: center; margin-top: 15px; color: var(--accent); }
+    #manual-copy { width: 100%; min-height: 160px; font: inherit; margin-top: 15px; }
+    .share-layout { width: 720px !important; max-width: none !important; box-shadow: none; border-radius: 0; }
+    .share-layout .result-grid { grid-template-columns: 1fr 1fr !important; }
+    .share-layout .avatar-frame { min-height: 300px !important; }
+    .share-layout h2 { font-size: 2rem; }
+    .share-layout p { font-size: .85rem; }
+    @media (max-width: 680px) {
+      .intro-layout, .result-grid { grid-template-columns: 1fr; }
+      .intro-layout { text-align: center; }
+      .photo-stack { width: min(360px, 95%); margin: 15px auto; height: 330px; }
+      .card { padding: 23px; }
+      .avatar-frame { aspect-ratio: 1; min-height: 280px; }
+      .actions .primary { width: 100%; }
+      .actions .secondary { flex: 1; }
+      header .eyebrow { font-size: .65rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="brand">✧ 心動光譜</div>
+    <div class="eyebrow">EORZEA · LOVE STUDY</div>
+  </header>
+
+  <div class="progress-area">
+    <div class="container progress-row">
+      <span id="progress-label">你的心動，從日常開始</span>
+      <progress id="quiz-progress" value="0" max="24" aria-label="測驗進度"></progress>
+      <span id="progress-count">00 / 24</span>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- 首頁：直接修改這裡的 HTML 即可修改首頁文字。 -->
+    <section id="intro-view" class="intro-layout">
+      <div>
+        <p class="eyebrow">FFXIV / 戀愛偏好測驗</p>
+        <h1>在艾奧傑亞，<br>誰會是你的<br><span>理想男朋友？</span></h1>
+        <p class="intro-description">讓你心動的，是說出口的喜歡，<br>還是那些被好好記住的小事？<br>從 24 個日常情境，找出你偏愛的相處方式。</p>
+        <div><span class="tag">12 位角色</span><span class="tag">6 維心動光譜</span><span class="tag">約 5–7 分鐘</span></div>
+        <button id="start-button" class="primary" type="button">開始尋找心動 ↗</button>
+      </div>
+      <div class="photo-stack">
+        <figure><img src="images/graha.png" alt="古拉哈提亞"><figcaption>A LITTLE ADVENTURE</figcaption></figure>
+        <figure><img src="images/themis.png" alt="特彌斯"><figcaption>A QUIET PROMISE</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 題目區：四個選項固定存在，由 JavaScript 填入文字。 -->
+    <section id="quiz-view" hidden>
+      <div class="question-top">
+        <span id="scene-label" class="eyebrow"></span>
+        <button id="restart-button" class="secondary" type="button">重新開始</button>
+      </div>
+      <div id="question-card" class="card">
+        <div id="question-number"></div>
+        <h2 id="question-title" tabindex="-1"></h2>
+        <div class="options" id="answer-options">
+          <button class="option" type="button"><span class="letter">A</span><span class="answer-text"></span></button>
+          <button class="option" type="button"><span class="letter">B</span><span class="answer-text"></span></button>
+          <button class="option" type="button"><span class="letter">C</span><span class="answer-text"></span></button>
+          <button class="option" type="button"><span class="letter">D</span><span class="answer-text"></span></button>
+        </div>
+      </div>
+      <button id="back-button" class="secondary" type="button">← 上一題</button>
+    </section>
+
+    <!-- 結果卡：圖片、文字與 Canvas 都是明確的 HTML 元素。 -->
+    <section id="result-view" hidden>
+      <p class="result-kicker eyebrow">原來，你的心動有這樣的形狀。</p>
+      <article id="share-card" class="card">
+        <div class="card-heading"><p class="eyebrow">FFXIV · YOUR LOVE SPECTRUM</p><strong>FF14 中最適合你的男朋友</strong></div>
+        <div class="result-grid">
+          <div class="avatar-frame"><img class="result-avatar" id="result-avatar" alt="配對角色"></div>
+          <div>
+            <p id="result-english" class="eyebrow"></p>
+            <h2 id="result-name" tabindex="-1"></h2>
+            <p id="result-title"></p>
+            <div><span id="trait-archetype" class="tag"></span><span id="trait-hidden" class="tag"></span></div>
+            <canvas id="radar" width="720" height="610" role="img" aria-label="六維偏好雷達，數值列於下方"></canvas>
+            <div class="legend"><span>實線：你的偏好</span> ／ <span>虛線：角色基準</span></div>
+            <div class="axis-values" id="axis-values">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+        <section class="reason-panel">
+          <p class="eyebrow">WHY YOUR HEART SAYS YES</p>
+          <h3 id="reason-title"></h3>
+          <p id="result-dimension-reason"></p>
+        </section>
+        <section class="analysis-block"><h3>隱藏魅力點</h3><p id="result-charm"></p></section>
+        <section class="analysis-block"><h3>相處剖析</h3><p id="result-analysis"></p></section>
+        <section class="analysis-block"><h3>避雷指南</h3><p id="result-warning"></p></section>
+      </article>
+      <div class="actions">
+        <button id="download-button" class="primary" type="button">生成分享圖片</button>
+        <button id="copy-button" class="secondary" type="button">複製結果文字</button>
+        <button id="again-button" class="secondary" type="button">再測一次</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+      <textarea id="manual-copy" aria-label="手動複製結果文字" readonly hidden></textarea>
+    </section>
+  </main>
+
+  <!-- 加時賽：永遠只呈現兩個匿名選項。 -->
+  <dialog id="tie-dialog" aria-labelledby="tie-title">
+    <p id="tie-progress" class="eyebrow"></p>
+    <h2 id="tie-title">再靠近心動一點。</h2>
+    <p>原本很期待的週末計畫取消了，你有點失落，也不想假裝沒事。今晚，你更希望對方怎麼做？</p>
+    <div class="options">
+      <button id="tie-a" class="option" type="button"><span class="letter">A</span><span></span></button>
+      <button id="tie-b" class="option" type="button"><span class="letter">B</span><span></span></button>
+    </div>
+  </dialog>
+
+  <script>
+    /* ===== 5. 角色資料、六維文案、24 題均衡題庫 ===== */
+        const AXES = [
+      "情緒共鳴",
+      "務實擔當",
+      "坦率表達",
+      "自主空間",
+      "探索成長",
+      "戀愛張力"
+    ];
+    
+    const AXIS_COPY = [
+      [
+        "細膩共感型",
+        "你最在意的是，情緒還沒整理好時，也能被認真對待。比起立刻得到答案，你更珍惜有人願意聽懂那些欲言又止。把「我現在需要陪伴，還是建議」說清楚，會讓這份默契更靠近你。"
+      ],
+      [
+        "行動安心型",
+        "你的心動常藏在小事裡：準時出現、把約定記住、出問題時一起處理。你想要的可靠不是替你決定人生，而是當你需要時，對方能分擔重量，也尊重你的選擇。"
+      ],
+      [
+        "直球交流型",
+        "你偏愛能把喜歡與不舒服都說明白的關係。猜測太久會消耗你的熱情，清楚的回應反而讓你安心。坦白不必尖銳，直接也能留有溫柔。"
+      ],
+      [
+        "自在並肩型",
+        "你珍惜靠近，也需要呼吸的距離。能各自投入生活，再帶著新故事回來，是你偏好的親密節奏。先約好聯絡與獨處的方式，空間就不會被誤讀成冷淡。"
+      ],
+      [
+        "共同成長型",
+        "讓你心動的，往往是「我們還可以一起去看看」。新的體驗、認真的提問、互相鼓勵，都讓關係保持生命力。記得把休息也排進未來，而不是只有下一個目標。"
+      ],
+      [
+        "強烈吸引型",
+        "你容易被鮮明的意志、對等的交鋒與強烈的專注吸引。你想感受到自己被看見，而非平淡地被安排。戲劇張力可以是樂趣，但尊重與同意才讓心動有地方落腳。"
+      ]
+    ];
+    
+    const CHARACTERS = [
+      {
+        "key": "thancred",
+        "name": "桑克瑞德",
+        "en": "Thancred",
+        "title": "把退路留給你的守護者",
+        "tags": [
+          "行動守護",
+          "成熟應變"
+        ],
+        "baseline": [
+          76,
+          95,
+          62,
+          76,
+          70,
+          63
+        ],
+        "canon": "機敏、擅長社交與臨場應變；玩笑背後有強烈的守護責任，也容易背負自責。",
+        "charm": "他未必把關心說滿，卻會記得你回家那段路哪裡沒有路燈。",
+        "analysis": "你們的靠近像有人替生活接住一角。他能處理突發狀況，也接得住玩笑；等安全下來，你需要主動問問那個總說「沒事」的人。可靠不是沒有疲憊，而是能互相分擔。",
+        "warning": "別把逞強當成不需要照顧。遇到重要決定，要求一起討論，別讓保護變成單方面安排。",
+        "tie": "先把晚餐和回家的事照顧好，用玩笑逗人鬆口氣，自己的疲憊卻一句帶過。"
+      },
+      {
+        "key": "graha",
+        "name": "古拉哈提亞",
+        "en": "G’raha Tia",
+        "title": "把明天寫成我們的同行者",
+        "tags": [
+          "真誠陪伴",
+          "共同冒險"
+        ],
+        "baseline": [
+          94,
+          87,
+          85,
+          48,
+          96,
+          67
+        ],
+        "canon": "對知識與冒險充滿熱情，懷抱希望，也有承擔長遠計畫的意志與判斷力。",
+        "charm": "你隨口說想去的小地方，會悄悄出現在下一次共同計畫裡。",
+        "analysis": "你們的甜度來自一起期待明天。他願意熱烈回應，也能在必要時站穩；相處時，別只問他願不願意陪你，也問他自己最想做什麼。被需要之外，他也值得被選擇。",
+        "warning": "留意過度付出與自我犧牲。不要用「你不是最支持我嗎」讓他忽略自己的需求。",
+        "tie": "帶著一件想一起做的小事過來，真心期待這個夜晚能重新變得值得記住。"
+      },
+      {
+        "key": "urianger",
+        "name": "尤里安傑",
+        "en": "Urianger",
+        "title": "替沉默找到語言的知己",
+        "tags": [
+          "深度理解",
+          "含蓄溫柔"
+        ],
+        "baseline": [
+          89,
+          78,
+          35,
+          84,
+          93,
+          48
+        ],
+        "canon": "博學而內斂，表達迂迴，面對艱難處境仍有堅定信念。",
+        "charm": "當別人急著下結論，他願意陪你把一句說不清的話慢慢拆開。",
+        "analysis": "這份關係適合緩慢建立。一起讀書、長談，或安靜坐著，都可能很親密；但深度不應變成解謎。你可以欣賞他的思考，也請他把眼前的需要說得簡單一點。",
+        "warning": "不要只靠暗示互猜。重要承諾、時間與界線，需要具體而直接的確認。",
+        "tie": "慎重問起失落的原因，陪著慢慢談；真正的心意仍藏在迂迴的字句裡。"
+      },
+      {
+        "key": "alphinaud",
+        "name": "阿爾菲諾",
+        "en": "Alphinaud",
+        "title": "和你一起練習明天的理想家",
+        "tags": [
+          "共同成長",
+          "認真溝通"
+        ],
+        "baseline": [
+          86,
+          73,
+          82,
+          63,
+          98,
+          35
+        ],
+        "canon": "早慧、理想感強，重視外交與溝通；挫折使他學會聆聽與成長。",
+        "charm": "他會認真對待你的想法，連還不成熟的小願望也不敷衍。",
+        "analysis": "這是一段以同齡青春相伴為想像的關係：一起學習、交換看法，也一起承認還不會。你們能鼓勵彼此前進；有時先陪伴，比急著替對方找出更好的做法更重要。",
+        "warning": "別讓相處變成進度報告。可以有理想，也要容許失敗與什麼都不做的下午。",
+        "tie": "立刻想出幾個補救計畫，察覺氣氛後才放慢語速，把方案一項項收起來。"
+      },
+      {
+        "key": "estinien",
+        "name": "艾絲蒂尼安",
+        "en": "Estinien",
+        "title": "留著空間也會並肩的旅人",
+        "tags": [
+          "安靜行動",
+          "獨立同行"
+        ],
+        "baseline": [
+          55,
+          87,
+          59,
+          98,
+          82,
+          62
+        ],
+        "canon": "寡言、獨立，曾被復仇驅動，也逐漸學會放下與向他人表達感謝。",
+        "charm": "不一定長篇安慰，卻可能默默替你把那件最麻煩的事做完。",
+        "analysis": "你們不必一直說話，也能感到對方在。各自忙碌、偶爾同行的節奏很合拍；但沉默不是自動理解。把需要說出來，才能讓他的行動照顧到真正的你。",
+        "warning": "不要用失聯考驗在乎，也別期待他讀心。約好最低限度的聯絡與共同時間。",
+        "tie": "安靜留下來陪著，不強迫解釋，直到夜深也沒有多說幾句話。"
+      },
+      {
+        "key": "emet",
+        "name": "愛梅特賽爾克",
+        "en": "Emet-Selch",
+        "title": "把偏愛藏進記憶的挑剔者",
+        "tags": [
+          "克制偏愛",
+          "銳利交鋒"
+        ],
+        "baseline": [
+          56,
+          75,
+          72,
+          83,
+          65,
+          94
+        ],
+        "canon": "敏銳、傲慢而刻薄，深受失落與記憶牽引；深情與傷害可以同時存在。",
+        "charm": "嘴上嫌你麻煩，卻記得一個連你都快忘記的小習慣。",
+        "analysis": "這條二創路線的吸引力，是對等交鋒後被特別記住的感覺。你可以喜歡他的複雜，也不必替尖銳找理由。真正走近，需要他看見眼前的你，而不是把你塞進過去。",
+        "warning": "別把貶低理解成愛的證明。懷念不該成為比較你的尺，你也不是任何人的替代品。",
+        "tie": "先嫌這個安排本來就不可靠，卻已找好另一個值得去的地方，嘴硬得像只是順路。"
+      },
+      {
+        "key": "themis",
+        "name": "特彌斯",
+        "en": "Themis",
+        "title": "把你的意見放進承諾的同行者",
+        "tags": [
+          "溫和堅定",
+          "平等尊重"
+        ],
+        "baseline": [
+          91,
+          89,
+          76,
+          74,
+          80,
+          42
+        ],
+        "canon": "採古代時期視角：熱心履職、珍惜友情，願意讓不同意見得到公平對待。",
+        "charm": "他不是什麼都說好，而是會把「你怎麼想」真的算進決定裡。",
+        "analysis": "這份相處的安定，來自被平等看待。你們能談承諾，也容許不同意見；當他總先想到應該做什麼，記得邀請他說出自己想要什麼。溫和的人也有願望。",
+        "warning": "不要把禮貌當作永遠同意。鼓勵彼此明說拒絕，責任與私人時間也要有界線。",
+        "tie": "仔細聽完失落的緣由，溫和地重新安排，先把責任與承諾都放在考量裡。"
+      },
+      {
+        "key": "gaius",
+        "name": "蓋烏斯",
+        "en": "Gaius",
+        "title": "讓約定有著落的責任者",
+        "tags": [
+          "秩序承擔",
+          "穩定安排"
+        ],
+        "baseline": [
+          43,
+          98,
+          79,
+          69,
+          58,
+          71
+        ],
+        "canon": "具備指揮與治理能力，重視秩序與責任；同時帶有帝國式的權威與控制傾向。",
+        "charm": "他不只說「交給我」，還會把時間、資源和下一步交代清楚。",
+        "analysis": "你可能偏愛有計畫、有交代的相處。這條路線取其責任感做日常二創，不替原作立場背書。穩定要建立在共同決策上：能幫你收拾局面，也要願意聽你改變方向。",
+        "warning": "高效率不能取代同意。遇到命令式口氣要說清楚：這是兩個人的生活，不是上下級。",
+        "tie": "迅速安排替代方案，讓今晚不至於空轉，說話時像在把一場小危機重新納入秩序。"
+      },
+      {
+        "key": "zenos",
+        "name": "芝諾斯",
+        "en": "Zenos",
+        "title": "只向強烈心跳靠近的對手",
+        "tags": [
+          "極致專注",
+          "危險張力"
+        ],
+        "baseline": [
+          10,
+          28,
+          98,
+          91,
+          73,
+          100
+        ],
+        "canon": "以極端欲望驅動，追逐對抗與強烈感受，缺乏互惠且具有破壞性。",
+        "charm": "在戲劇想像裡，他會把你的實力當真，毫不敷衍地全力回應。",
+        "analysis": "這是黑暗浪漫與勢均力敵的幻想路線。你被吸引的可能是強烈關注與鮮明意志，不代表你想被傷害。欣賞虛構張力，與選擇日常伴侶，是可以分開的兩件事。",
+        "warning": "執著不等於照顧，越界不等於深愛。現實相處中，任何挑戰都必須能拒絕、能停止。",
+        "tie": "對取消本身沒什麼感覺，只提議找一件能全力投入的事，把情緒交給更強烈的挑戰。"
+      },
+      {
+        "key": "magnai",
+        "name": "瑪格奈",
+        "en": "Magnai",
+        "title": "把喜歡說成大事的追求者",
+        "tags": [
+          "直球熱情",
+          "命定浪漫"
+        ],
+        "baseline": [
+          34,
+          79,
+          96,
+          35,
+          49,
+          91
+        ],
+        "canon": "驕傲、自信，相信命定伴侶；對理想對象的僵化期待，也曾讓他誤讀與侵犯界線。",
+        "charm": "喜歡很難藏住，想讓你感到自己是被隆重放在心上的人。",
+        "analysis": "這條二創路線保留盛大承諾和直球表達的吸引力。磨合的關鍵，是讓他從「我想像中的那個人」走向認識真正的你。被珍惜，不應以符合某個劇本為條件。",
+        "warning": "不要替自我中心美化。你的拒絕需要被接受，浪漫安排也要先問你的喜好。",
+        "tie": "自信地說能讓今晚更值得期待，已經開始說起自己想像中的完美安排。"
+      },
+      {
+        "key": "hermes",
+        "name": "赫爾墨斯",
+        "en": "Hermes",
+        "title": "陪你追問答案的敏感靈魂",
+        "tags": [
+          "存在共感",
+          "深層思索"
+        ],
+        "baseline": [
+          93,
+          37,
+          44,
+          85,
+          97,
+          69
+        ],
+        "canon": "對生命與痛苦敏感，追問存在意義；也可能陷入孤立思考，做出與同情心矛盾的傷害選擇。",
+        "charm": "你那些被說成「想太多」的疑問，在他面前可以被認真展開。",
+        "analysis": "你們可能因深層的疑問而靠近：那些不容易被安慰的心情，終於有人願意聽。理解不等於同意所有結論，陪伴也不等於必須救贖對方。關係需要兩個人都願意回到生活。",
+        "warning": "留意反覆鑽入同一問題卻拒絕交流。你不必以耗盡自己，證明自己足夠理解他。",
+        "tie": "不急著說事情會變好，陪著談那份失落為何如此沉重，話題漸漸延伸得很遠。"
+      },
+      {
+        "key": "hythlodaeus",
+        "name": "希斯拉德",
+        "en": "Hythlodaeus",
+        "title": "看懂你也讓你自在的知音",
+        "tags": [
+          "細膩體貼",
+          "輕盈幽默"
+        ],
+        "baseline": [
+          97,
+          65,
+          72,
+          81,
+          77,
+          58
+        ],
+        "canon": "洞察敏銳、性情自在，愛和朋友玩笑，也會留意別人的疲憊與困境。",
+        "charm": "能察覺你有點勉強，卻不當眾拆穿，只替你留一個自在退出的理由。",
+        "analysis": "你們的親密可以很輕盈。他善於讓氣氛鬆下來，細心又不逼近；但看得透不代表能讀心。也別只習慣被照顧，偶爾主動問問，笑著陪你的人今天過得如何。",
+        "warning": "別讓幽默把嚴肅需求帶走。當你真的在意一件事，請明白告訴他，並留時間聽他的答案。",
+        "tie": "先用一點玩笑試著鬆開氣氛，看見笑不出來時便收起打趣，安靜留下。"
+      }
+    ];
+
+    const QUESTIONS = [
+      [
+        "下班之後",
+        "今天你被一件小事擊垮了。對方怎麼回應，最能讓你放鬆？",
+        [
+          [
+            10,
+            "聽完原因後安靜了一會，低聲說那件事確實很難想通，話題慢慢延伸到更深的疑問。",
+            [
+              4,
+              1,
+              2,
+              3,
+              4,
+              1
+            ]
+          ],
+          [
+            7,
+            "先把晚餐和雜事一項項安頓好，語氣像在安排待辦，直到坐下來才放慢聲音。",
+            [
+              1,
+              4,
+              2,
+              1,
+              0,
+              1
+            ]
+          ],
+          [
+            9,
+            "先沉下臉追問是誰讓人受委屈，說自己會處理，關心顯得直接又有些強勢。",
+            [
+              2,
+              2,
+              4,
+              1,
+              0,
+              3
+            ]
+          ],
+          [
+            3,
+            "很快開始拆解問題、提出做法，察覺氣氛不對後停下來，認真聽完剩下的話。",
+            [
+              3,
+              3,
+              3,
+              2,
+              4,
+              0
+            ]
+          ]
+        ]
+      ],
+      [
+        "意見不同",
+        "一起選週末行程卻意見不合，你喜歡哪種討論方式？",
+        [
+          [
+            11,
+            "笑著點破兩個人都在逞強，讓氣氛鬆下來；真正的分歧仍被他留在玩笑後面。",
+            [
+              4,
+              2,
+              2,
+              3,
+              2,
+              1
+            ]
+          ],
+          [
+            6,
+            "把兩邊的理由都聽完，溫和而堅定地提出取捨，不因怕掃興就什麼都答應。",
+            [
+              3,
+              3,
+              3,
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            8,
+            "毫不掩飾地說另一個安排太無聊，直接把話題拉向更有挑戰性的選項。",
+            [
+              0,
+              1,
+              4,
+              3,
+              3,
+              4
+            ]
+          ],
+          [
+            2,
+            "從兩個安排各自的意義談起，分析得很仔細，最後仍把自己的選擇說得委婉。",
+            [
+              4,
+              1,
+              1,
+              3,
+              4,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "短途旅行",
+        "只剩一天假期，怎樣的邀約會讓你期待？",
+        [
+          [
+            1,
+            "興奮列出好幾個想去的地方，行程越排越滿，直到發現時間只剩一天才笑了出來。",
+            [
+              3,
+              2,
+              3,
+              1,
+              4,
+              2
+            ]
+          ],
+          [
+            0,
+            "說得像隨興出門，交通、住宿與退路卻早已查好；被問起時只用玩笑帶過。",
+            [
+              2,
+              4,
+              2,
+              2,
+              2,
+              1
+            ]
+          ],
+          [
+            5,
+            "先說沒什麼值得期待，到了老地方卻能講出每個角落的舊事，話題漸漸停在過去。",
+            [
+              2,
+              2,
+              1,
+              3,
+              3,
+              4
+            ]
+          ],
+          [
+            4,
+            "簡單收拾就準備出發，只先決定大方向，沿途想去哪裡再停下來看看。",
+            [
+              1,
+              2,
+              2,
+              4,
+              4,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "臨時出包",
+        "訂好的餐廳突然休息。哪個反應最加分？",
+        [
+          [
+            7,
+            "立刻選出最可行的替代餐廳，已經朝那個方向走去，才停下來補問想吃什麼。",
+            [
+              1,
+              4,
+              3,
+              2,
+              1,
+              1
+            ]
+          ],
+          [
+            11,
+            "笑說這下多了一段新故事，提議沿街看看，常常被新發現帶得比原定時間更晚。",
+            [
+              3,
+              1,
+              2,
+              3,
+              4,
+              2
+            ]
+          ],
+          [
+            0,
+            "先用玩笑化解掃興，再去問路與找店，把麻煩攬到自己手上，不太提自己的疲憊。",
+            [
+              2,
+              4,
+              2,
+              2,
+              2,
+              1
+            ]
+          ],
+          [
+            6,
+            "先弄清原本安排為何落空，再把選項一一列出，即使聽到「都可以」也會再確認一次。",
+            [
+              3,
+              3,
+              3,
+              3,
+              1,
+              0
+            ]
+          ]
+        ]
+      ],
+      [
+        "學點新事",
+        "你想學一項完全陌生的技能，希望他如何參與？",
+        [
+          [
+            3,
+            "比誰都早找好教材和練習表，連小興趣也安排得像一門要認真完成的課。",
+            [
+              2,
+              2,
+              3,
+              2,
+              4,
+              1
+            ]
+          ],
+          [
+            2,
+            "從原理開始耐心解釋，一個問題接著一個問題，講著講著就比練習本身更深入。",
+            [
+              3,
+              2,
+              1,
+              3,
+              4,
+              0
+            ]
+          ],
+          [
+            9,
+            "自信地說可以教，遇到對方做得漂亮時先愣一下，再很快恢復成誇獎的語氣。",
+            [
+              2,
+              2,
+              4,
+              1,
+              3,
+              4
+            ]
+          ],
+          [
+            10,
+            "先問起想學的理由，越談越被那份好奇吸引，練習工具反而一直留在一旁。",
+            [
+              4,
+              0,
+              2,
+              3,
+              4,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "遊戲時間",
+        "一起玩桌遊時，什麼互動讓你心動？",
+        [
+          [
+            8,
+            "完全不放水，只有遇到真正全力以赴的對手時才明顯投入，普通暖場局很難提起興致。",
+            [
+              0,
+              1,
+              4,
+              3,
+              3,
+              4
+            ]
+          ],
+          [
+            5,
+            "邊嫌策略太冒險邊仔細觀察，結束後精準指出亮點，稱讚總要包在一句吐槽裡。",
+            [
+              1,
+              2,
+              2,
+              3,
+              3,
+              4
+            ]
+          ],
+          [
+            4,
+            "一坐下就專心投入自己的部分，需要配合時很可靠，卻很少主動說明下一步打算。",
+            [
+              1,
+              3,
+              1,
+              4,
+              2,
+              2
+            ]
+          ],
+          [
+            1,
+            "玩得十分投入，結束後立刻想再試一次，談起戰術時常忘記原本約好只玩一局。",
+            [
+              3,
+              1,
+              4,
+              1,
+              4,
+              2
+            ]
+          ]
+        ]
+      ],
+      [
+        "聯絡頻率",
+        "各自忙碌的一週，你最舒服的聯絡方式是？",
+        [
+          [
+            6,
+            "答應的聯絡會做到，忙起來先處理應盡的責任，想念的話反而很少主動說。",
+            [
+              2,
+              4,
+              3,
+              3,
+              0,
+              0
+            ]
+          ],
+          [
+            8,
+            "平常幾乎不聊瑣事，遇到能讓他興奮的事才忽然傳來一句直接的邀約。",
+            [
+              0,
+              1,
+              4,
+              4,
+              1,
+              4
+            ]
+          ],
+          [
+            7,
+            "固定時間確認近況，臨時變更也會交代，問候的語氣偶爾像在核對事情是否辦妥。",
+            [
+              1,
+              4,
+              3,
+              3,
+              0,
+              1
+            ]
+          ],
+          [
+            11,
+            "傳來一句只有彼此懂的玩笑，不催著回覆；談到自己的近況時又輕巧地岔開。",
+            [
+              4,
+              1,
+              2,
+              4,
+              2,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "小小禮物",
+        "什麼樣的禮物最容易留在你心裡？",
+        [
+          [
+            5,
+            "送來很久以前隨口提過的物品，卻只說是碰巧看見，不承認自己一直記得。",
+            [
+              3,
+              2,
+              1,
+              2,
+              1,
+              4
+            ]
+          ],
+          [
+            9,
+            "鄭重準備一份他認定足以表達心意的禮物，期待地等待反應，選擇卻帶著自己的想像。",
+            [
+              2,
+              3,
+              4,
+              0,
+              1,
+              4
+            ]
+          ],
+          [
+            10,
+            "送來一本滿是註記的書，夾著反覆思考的問題，讀起來比一般禮物更沉重。",
+            [
+              4,
+              0,
+              1,
+              3,
+              4,
+              1
+            ]
+          ],
+          [
+            2,
+            "寫下一封措辭細緻的信，把最重要的感受藏在層層斟酌的字句之間。",
+            [
+              4,
+              1,
+              2,
+              3,
+              3,
+              2
+            ]
+          ]
+        ]
+      ],
+      [
+        "一起做飯",
+        "廚房有點混亂。你偏愛哪種搭檔？",
+        [
+          [
+            1,
+            "躍躍欲試地研究喜歡的味道，邊做邊問意見，自己的偏好卻總排在後面。",
+            [
+              3,
+              2,
+              3,
+              1,
+              4,
+              1
+            ]
+          ],
+          [
+            3,
+            "先把步驟與分工整理清楚，遇到實作不如預期時會停下來重新請教。",
+            [
+              2,
+              3,
+              3,
+              2,
+              4,
+              0
+            ]
+          ],
+          [
+            0,
+            "看見手忙腳亂就自然接過最麻煩的部分，嘴上說不費事，手邊的工作越堆越多。",
+            [
+              3,
+              4,
+              1,
+              2,
+              1,
+              1
+            ]
+          ],
+          [
+            4,
+            "缺哪一步就立刻去做，動作乾脆；至於調味，他認為能吃就已經足夠。",
+            [
+              1,
+              4,
+              1,
+              4,
+              1,
+              0
+            ]
+          ]
+        ]
+      ],
+      [
+        "見朋友",
+        "第一次一起見你的朋友，哪種表現讓你安心？",
+        [
+          [
+            9,
+            "很大方地稱讚身邊的人，談起關係時卻不自覺說得像自己早已想好的命定故事。",
+            [
+              2,
+              2,
+              4,
+              1,
+              1,
+              4
+            ]
+          ],
+          [
+            4,
+            "不太主動寒暄，被問到才直答，答案短得讓氣氛停一瞬，仍會安靜留在身旁。",
+            [
+              1,
+              2,
+              1,
+              4,
+              1,
+              1
+            ]
+          ],
+          [
+            1,
+            "認真記住每個朋友的故事，問題一個接一個，投入得像是在補齊重要的世界地圖。",
+            [
+              4,
+              1,
+              3,
+              1,
+              4,
+              1
+            ]
+          ],
+          [
+            11,
+            "察覺有人想暫時離席，笑著找個自然的藉口，把空間留得不著痕跡。",
+            [
+              4,
+              3,
+              1,
+              3,
+              1,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "一點爭執",
+        "你們鬧了彆扭。你更願意接受哪種修復？",
+        [
+          [
+            5,
+            "先爭辯自己當時的理由，冷靜後卻記得哪一句話刺傷了人，補救行動往往早於道歉。",
+            [
+              2,
+              3,
+              2,
+              3,
+              2,
+              3
+            ]
+          ],
+          [
+            10,
+            "想把爭執底下的失望說清楚，話題越繞越深，最後容易停在尚未解開的問題上。",
+            [
+              4,
+              1,
+              3,
+              2,
+              4,
+              1
+            ]
+          ],
+          [
+            2,
+            "先安靜整理情緒，再慢慢解釋心意；重要的話常被長長的鋪陳包住。",
+            [
+              3,
+              2,
+              2,
+              4,
+              3,
+              0
+            ]
+          ],
+          [
+            7,
+            "立刻承擔自己造成的問題，拿出改進方案，談話很快變成一張可執行的清單。",
+            [
+              1,
+              4,
+              4,
+              2,
+              2,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "猶豫的決定",
+        "你在考慮一個新機會，他怎樣支持最合拍？",
+        [
+          [
+            8,
+            "不太談舒適與安穩，只問這件事是否值得全力投入，答案直接得近乎鋒利。",
+            [
+              0,
+              1,
+              4,
+              4,
+              4,
+              4
+            ]
+          ],
+          [
+            0,
+            "先把風險、退路與最壞情況全看過，連尚未發生的麻煩也準備一併處理。",
+            [
+              2,
+              4,
+              2,
+              3,
+              3,
+              1
+            ]
+          ],
+          [
+            6,
+            "認真問清真正想法，再說出他認為不能忽略的責任，不會只給一句輕飄飄的支持。",
+            [
+              3,
+              2,
+              3,
+              4,
+              2,
+              0
+            ]
+          ],
+          [
+            3,
+            "從能學到什麼一路談到更遠的可能性，理想越說越亮，計畫也跟著越拉越大。",
+            [
+              2,
+              3,
+              3,
+              2,
+              4,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "難眠的夜",
+        "深夜還睡不著，你想和他怎麼度過？",
+        [
+          [
+            10,
+            "從一件難過的小事談到更大的疑問，語氣溫和，話題卻容易讓夜晚變得更深。",
+            [
+              4,
+              0,
+              2,
+              3,
+              4,
+              1
+            ]
+          ],
+          [
+            4,
+            "安靜留在旁邊，不逼著解釋，也不太主動把沉默撬開。",
+            [
+              1,
+              1,
+              0,
+              4,
+              1,
+              0
+            ]
+          ],
+          [
+            11,
+            "先用不傷人的小玩笑試著鬆開氣氛，看見笑不出來時才收起打趣，安靜問出了什麼事。",
+            [
+              4,
+              1,
+              3,
+              2,
+              1,
+              1
+            ]
+          ],
+          [
+            7,
+            "把明天要處理的事一項項整理好，認為少一件煩惱就能休息，對無名的低落顯得笨拙。",
+            [
+              1,
+              4,
+              2,
+              2,
+              1,
+              0
+            ]
+          ]
+        ]
+      ],
+      [
+        "共同預算",
+        "規劃一筆共同開銷時，你重視哪種態度？",
+        [
+          [
+            2,
+            "先談彼此真正珍惜什麼，討論一路延伸到價值與選擇，實際數字最後才慢慢浮現。",
+            [
+              3,
+              2,
+              2,
+              3,
+              3,
+              0
+            ]
+          ],
+          [
+            8,
+            "對日常開銷沒什麼興趣，碰到自己執著的事卻毫不猶豫，取捨只遵從強烈的意志。",
+            [
+              0,
+              1,
+              4,
+              4,
+              2,
+              4
+            ]
+          ],
+          [
+            3,
+            "仔細比較每種選擇，想找出最周全的解法，資料越查越多，決定反而更難落下。",
+            [
+              2,
+              4,
+              3,
+              2,
+              4,
+              0
+            ]
+          ],
+          [
+            6,
+            "把雙方負擔攤開衡量，先確保沒有人被勉強，自己的願望常被放到最後。",
+            [
+              3,
+              4,
+              3,
+              3,
+              1,
+              0
+            ]
+          ]
+        ]
+      ],
+      [
+        "值得慶祝",
+        "你完成一件很在意的事，期待他如何回應？",
+        [
+          [
+            9,
+            "毫不含糊地說做得很好，當場開始構想一場隆重慶祝，氣勢像要讓所有人知道。",
+            [
+              2,
+              3,
+              4,
+              0,
+              2,
+              4
+            ]
+          ],
+          [
+            1,
+            "真心替人開心，剛慶祝完就興奮想到下一件能一起完成的事。",
+            [
+              4,
+              1,
+              4,
+              1,
+              4,
+              2
+            ]
+          ],
+          [
+            5,
+            "稱讚得很短，卻精準指出付出的功夫，末尾總忍不住補一句下次能做得更好。",
+            [
+              2,
+              2,
+              2,
+              3,
+              3,
+              3
+            ]
+          ],
+          [
+            0,
+            "默默把收尾工作接過去，催人先休息；輪到自己被邀進慶祝時反而站得比較遠。",
+            [
+              3,
+              4,
+              2,
+              2,
+              1,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "放空週日",
+        "沒有計畫的午後，哪個畫面最吸引你？",
+        [
+          [
+            4,
+            "各自做自己的事也能自在待在同一個空間，不太主動為下午另加安排。",
+            [
+              1,
+              1,
+              0,
+              4,
+              1,
+              1
+            ]
+          ],
+          [
+            1,
+            "忽然想到一件想一起體驗的小事，眼睛都亮了，出門前才發現家事還沒處理。",
+            [
+              3,
+              1,
+              3,
+              1,
+              4,
+              2
+            ]
+          ],
+          [
+            10,
+            "原本只是閒聊，卻被一個問題吸引得忘了時間，連放空也慢慢變成思考。",
+            [
+              4,
+              0,
+              2,
+              3,
+              4,
+              1
+            ]
+          ],
+          [
+            9,
+            "直接說今天想一起度過，已經想好好幾個安排，熱情地一個接一個提出來。",
+            [
+              2,
+              2,
+              4,
+              1,
+              1,
+              4
+            ]
+          ]
+        ]
+      ],
+      [
+        "坦白脆弱",
+        "你說出一件一直沒自信的事，希望得到什麼？",
+        [
+          [
+            3,
+            "聽到不安後立刻開始找練習方法，看見氣氛更緊繃才放慢速度，改成耐心陪著。",
+            [
+              3,
+              3,
+              3,
+              2,
+              4,
+              0
+            ]
+          ],
+          [
+            11,
+            "察覺話說得很勉強，也不當場拆穿，只留下一句可以隨時再談的話。",
+            [
+              4,
+              1,
+              2,
+              4,
+              1,
+              0
+            ]
+          ],
+          [
+            8,
+            "不給安慰式稱讚，反而直問是否還想繼續，目光像在等待一個不退縮的回答。",
+            [
+              0,
+              1,
+              4,
+              4,
+              2,
+              4
+            ]
+          ],
+          [
+            5,
+            "直接指出被忽略的優點，記得的證據比誰都多，語氣卻很難稱得上溫柔。",
+            [
+              2,
+              3,
+              2,
+              3,
+              2,
+              3
+            ]
+          ]
+        ]
+      ],
+      [
+        "忙碌撞期",
+        "約會和臨時工作撞在一起，你欣賞哪種處理？",
+        [
+          [
+            7,
+            "優先把責任處理妥當，也會給出補約時間；行程在他手裡像一張必須完成的表。",
+            [
+              1,
+              4,
+              4,
+              3,
+              0,
+              0
+            ]
+          ],
+          [
+            6,
+            "兩邊都想認真履行，反而顯得最為難；願意面對失望，也不太擅長承認取捨。",
+            [
+              4,
+              3,
+              3,
+              3,
+              1,
+              0
+            ]
+          ],
+          [
+            2,
+            "慎重解釋事情的緣由，說了很多顧慮，真正想赴約的心意卻藏在最後。",
+            [
+              3,
+              3,
+              2,
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            0,
+            "想把兩邊都顧到，把行程塞得很滿，最後連自己的休息也一起往後挪。",
+            [
+              2,
+              4,
+              2,
+              2,
+              1,
+              1
+            ]
+          ]
+        ]
+      ],
+      [
+        "一個人的時間",
+        "你提出想獨處一晚，哪個回應最舒服？",
+        [
+          [
+            4,
+            "乾脆答應，各自去做自己的事；隔天相見時才像什麼都沒發生一樣自然接上話題。",
+            [
+              1,
+              1,
+              3,
+              4,
+              1,
+              0
+            ]
+          ],
+          [
+            10,
+            "理解想安靜的感覺，自己也習慣把心事留著，沉默有時因此拖得比預想更久。",
+            [
+              4,
+              0,
+              1,
+              4,
+              4,
+              0
+            ]
+          ],
+          [
+            6,
+            "先慎重確認安排，再安靜尊重；一句普通的獨處需求被他對待得像正式約定。",
+            [
+              3,
+              3,
+              3,
+              4,
+              1,
+              0
+            ]
+          ],
+          [
+            5,
+            "表面說正好清靜，隔天卻若無其事地問一句昨晚過得如何。",
+            [
+              2,
+              2,
+              2,
+              4,
+              0,
+              2
+            ]
+          ]
+        ]
+      ],
+      [
+        "不順的一天",
+        "旅途中行李不見了，你最想要哪種搭檔？",
+        [
+          [
+            0,
+            "先讓人坐下休息，再去聯絡櫃台；忙完仍能講個玩笑，卻不提自己其實也著急。",
+            [
+              3,
+              4,
+              2,
+              1,
+              1,
+              1
+            ]
+          ],
+          [
+            7,
+            "迅速分好要做的事，處理效率很高，語氣自然地把現場變成一個必須聽令的單位。",
+            [
+              0,
+              4,
+              3,
+              2,
+              1,
+              0
+            ]
+          ],
+          [
+            3,
+            "仔細查流程、和櫃台溝通，努力找出轉圜辦法，有時把人力與時間想得太理想。",
+            [
+              2,
+              4,
+              3,
+              2,
+              3,
+              0
+            ]
+          ],
+          [
+            8,
+            "對行李本身沒多少耐性，只問還要不要繼續行程；一旦決定繼續便立刻動身。",
+            [
+              0,
+              1,
+              4,
+              3,
+              3,
+              4
+            ]
+          ]
+        ]
+      ],
+      [
+        "不同興趣",
+        "他最愛的興趣你不熟，你喜歡怎麼分享彼此的世界？",
+        [
+          [
+            11,
+            "挑最有趣的一段講得繪聲繪影，順便逗人兩句；談到自己的心事時又把話題轉開。",
+            [
+              4,
+              1,
+              2,
+              3,
+              3,
+              1
+            ]
+          ],
+          [
+            2,
+            "因為有人願意問就細細說明，一個小問題接一個小問題，常常講到很遠的地方。",
+            [
+              3,
+              1,
+              2,
+              3,
+              4,
+              0
+            ]
+          ],
+          [
+            1,
+            "分享得興奮又仔細，也真心想親自體驗對方的喜好，時間表很快被新的想法填滿。",
+            [
+              3,
+              2,
+              4,
+              2,
+              4,
+              2
+            ]
+          ],
+          [
+            9,
+            "自信展示最拿手的部分，明明期待稱讚，表面卻裝得那只是理所當然。",
+            [
+              2,
+              1,
+              4,
+              1,
+              3,
+              4
+            ]
+          ]
+        ]
+      ],
+      [
+        "未來的形狀",
+        "聊到未來，你更期待哪一句意思？",
+        [
+          [
+            6,
+            "談起未來先說自己該履行什麼承諾，私人願望被他放在責任後面才輕輕提起。",
+            [
+              3,
+              4,
+              3,
+              3,
+              2,
+              0
+            ]
+          ],
+          [
+            3,
+            "相信兩個人能一起變得更好，說起未來很有感染力，也把每段日子都看成下一步。",
+            [
+              3,
+              2,
+              3,
+              2,
+              4,
+              1
+            ]
+          ],
+          [
+            4,
+            "不急著給很遠的保證，答應同行後就以行動兌現，談話常停在簡短的一句「會去」。",
+            [
+              1,
+              3,
+              2,
+              4,
+              3,
+              1
+            ]
+          ],
+          [
+            8,
+            "想繼續被彼此激起強烈感受，對平穩日常沒有太多構想，目光始終望向下一場挑戰。",
+            [
+              0,
+              1,
+              4,
+              4,
+              4,
+              4
+            ]
+          ]
+        ]
+      ],
+      [
+        "表達喜歡",
+        "比起制式情話，哪種表達更能打動你？",
+        [
+          [
+            2,
+            "慎重說出對一個人的理解，話語含蓄得像繞了一圈，最直白的那句總留到最後。",
+            [
+              4,
+              1,
+              2,
+              3,
+              3,
+              1
+            ]
+          ],
+          [
+            9,
+            "直白而鄭重地說喜歡，同時也說起自己相信的命定關係，想像比現實跑得更快。",
+            [
+              2,
+              2,
+              4,
+              1,
+              1,
+              4
+            ]
+          ],
+          [
+            7,
+            "很少堆砌情話，答應的事會逐一做到，關心常藏在已經安排妥當的細節裡。",
+            [
+              1,
+              4,
+              2,
+              2,
+              0,
+              1
+            ]
+          ],
+          [
+            1,
+            "真誠說想一起留下更多回憶，說著說著便開始描述下一趟想共同經歷的冒險。",
+            [
+              4,
+              2,
+              4,
+              1,
+              4,
+              2
+            ]
+          ]
+        ]
+      ],
+      [
+        "舒服的結尾",
+        "約會結束，哪個瞬間會讓你想再見他？",
+        [
+          [
+            0,
+            "確認人安全到家才放心，被問起自己時只說沒什麼，轉身後才露出疲憊。",
+            [
+              3,
+              4,
+              2,
+              2,
+              0,
+              1
+            ]
+          ],
+          [
+            5,
+            "提起一個只有他記住的小細節，接著立刻裝得不以為意，像那份在乎只是巧合。",
+            [
+              3,
+              1,
+              2,
+              3,
+              1,
+              4
+            ]
+          ],
+          [
+            11,
+            "輕巧接住尷尬，讓告別不沉重；揮手時仍帶著那種看透卻不說破的笑意。",
+            [
+              4,
+              1,
+              3,
+              4,
+              1,
+              1
+            ]
+          ],
+          [
+            10,
+            "臨走還惦記著沒談完的疑問，又認真問了一句，直到時間很晚才察覺該道別了。",
+            [
+              4,
+              0,
+              2,
+              3,
+              4,
+              1
+            ]
+          ]
+        ]
+      ]
+    ];
+
+    function tally(answers){const scores=CHARACTERS.map(()=>0), sum=AXES.map(()=>0);let n=0;answers.forEach((a,q)=>{if(!Number.isInteger(a)||!QUESTIONS[q]||!QUESTIONS[q][2][a])return;const o=QUESTIONS[q][2][a];scores[o[0]]++;o[2].forEach((v,i)=>sum[i]+=v*25);n++;});return {scores,radar:sum.map(v=>n?Math.round(v/n):0),count:n};}
+    
+    function leaders(scores){const max=Math.max(...scores);return scores.map((s,i)=>s===max?i:-1).filter(i=>i>=0);}
+    
+    function rankAxes(values){return values.map((v,i)=>({v,i})).sort((a,b)=>b.v-a.v||a.i-b.i).map(x=>x.i);}
+    
+    function auditBank(){const counts=CHARACTERS.map(()=>[0,0,0,0]);const problems=[];QUESTIONS.forEach((q,i)=>{if(q[2].length!==4)problems.push('題目選項數:'+i);if(new Set(q[2].map(o=>o[0])).size!==4)problems.push('題目角色重複:'+i);q[2].forEach((o,p)=>{if(!counts[o[0]]){problems.push('角色索引');return;}counts[o[0]][p]++;if(o[2].length!==6||o[2].some(v=>v<0||v>4))problems.push('維度');if(CHARACTERS.some(c=>o[1].includes(c.name)||o[1].includes(c.en)))problems.push('洩漏名字');});});counts.forEach((r,i)=>{if(r.some(v=>v!==2))problems.push('出場不均:'+i);});return {ok:!problems.length,problems,counts};}
+    
+    
+
+    /* ===== 6. 測驗狀態與頁面切換 ===== */
+    const byId = id => document.getElementById(id);
+    const answerButtons = [...document.querySelectorAll('#answer-options button')];
+    let answers = [];
+    let questionIndex = 0;
+    let busy = false;
+    let winnerIndex = null;
+    let tieQueue = [];
+    let tiePair = [];
+    let tieTotal = 0;
+    let tieRound = 0;
+
+    function showView(name) {
+      ['intro', 'quiz', 'result'].forEach(view => {
+        byId(view + '-view').hidden = view !== name;
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function updateProgress(value, label) {
+      byId('quiz-progress').value = value;
+      byId('progress-label').textContent = label;
+      byId('progress-count').textContent = String(value).padStart(2, '0') + ' / 24';
+    }
+
+    function resetQuiz() {
+      answers = [];
+      questionIndex = 0;
+      winnerIndex = null;
+      busy = false;
+      tieQueue = [];
+      if (byId('tie-dialog').open) byId('tie-dialog').close();
+      byId('status').textContent = '';
+      byId('manual-copy').hidden = true;
+      updateProgress(0, '你的心動，從日常開始');
+      showView('intro');
+    }
+
+    function showQuestion() {
+      const question = QUESTIONS[questionIndex];
+      showView('quiz');
+      updateProgress(questionIndex, '情境 ' + String(questionIndex + 1).padStart(2, '0'));
+      byId('scene-label').textContent = 'DAILY SCENE / ' + question[0];
+      byId('question-number').textContent = String(questionIndex + 1).padStart(2, '0') + ' / 24';
+      byId('question-title').textContent = question[1];
+      answerButtons.forEach((button, index) => {
+        button.querySelector('.answer-text').textContent = question[2][index][1];
+        button.disabled = false;
+        button.classList.remove('selected');
+      });
+      byId('back-button').disabled = questionIndex === 0;
+      const card = byId('question-card');
+      card.classList.remove('enter');
+      void card.offsetWidth;
+      card.classList.add('enter');
+      byId('question-title').focus({ preventScroll: true });
+    }
+
+    function chooseAnswer(index) {
+      if (busy) return;
+      busy = true;
+      answers[questionIndex] = index;
+      answerButtons[index].classList.add('selected');
+      answerButtons.forEach(button => button.disabled = true);
+      setTimeout(() => {
+        questionIndex++;
+        busy = false;
+        if (questionIndex < QUESTIONS.length) showQuestion();
+        else finishQuiz();
+      }, 180);
+    }
+
+    /* ===== 7. 同分決選：隨機對陣，不按角色順序判勝 ===== */
+    function shuffled(list) {
+      const result = [...list];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function finishQuiz() {
+      const result = tally(answers);
+      const tied = leaders(result.scores);
+      if (tied.length === 1) return showFinalResult(tied[0]);
+      tieQueue = shuffled(tied);
+      tieTotal = tied.length;
+      tieRound = 0;
+      updateProgress(24, '同分加時');
+      nextTie();
+    }
+
+    function nextTie() {
+      if (tieQueue.length === 1) {
+        byId('tie-dialog').close();
+        showFinalResult(tieQueue[0]);
+        return;
+      }
+      tiePair = shuffled(tieQueue.splice(0, 2));
+      tieRound++;
+      byId('tie-progress').textContent = 'FINAL CHOICE / ' + tieRound + ' / ' + (tieTotal - 1);
+      byId('tie-a').lastElementChild.textContent = CHARACTERS[tiePair[0]].tie;
+      byId('tie-b').lastElementChild.textContent = CHARACTERS[tiePair[1]].tie;
+      if (!byId('tie-dialog').open) byId('tie-dialog').showModal();
+      byId('tie-a').focus();
+    }
+
+    function chooseTie(position) {
+      if (!byId('tie-dialog').open || ![0, 1].includes(position)) return;
+      tieQueue.push(tiePair[position]);
+      nextTie();
+    }
+
+    /* ===== 8. 結果：透過 textContent / src 更新固定 HTML ===== */
+    function getProfile() {
+      const result = tally(answers);
+      const maximum = Math.max(...result.radar);
+      const topAxes = result.radar.map((value, index) => value === maximum ? index : -1).filter(index => index >= 0);
+      return {
+        character: CHARACTERS[winnerIndex],
+        radar: result.radar,
+        topAxes,
+        reason: topAxes.map(index => AXIS_COPY[index][1]).join(' ')
+      };
+    }
+
+    function showFinalResult(index) {
+      winnerIndex = index;
+      const profile = getProfile();
+      const character = profile.character;
+      byId('result-avatar').src = 'images/' + character.key + '.png';
+      byId('result-avatar').alt = character.name;
+      byId('result-name').textContent = character.name;
+      byId('result-english').textContent = character.en;
+      byId('result-title').textContent = character.title;
+      byId('trait-archetype').textContent = character.tags[0];
+      byId('trait-hidden').textContent = character.tags[1];
+      byId('result-charm').textContent = character.charm;
+      byId('result-analysis').textContent = character.analysis;
+      byId('result-warning').textContent = character.warning;
+      byId('reason-title').textContent = '命定原因 · ' + profile.topAxes.map(i => AXES[i]).join(' × ');
+      byId('result-dimension-reason').textContent = profile.reason;
+      [...byId('axis-values').children].forEach((element, i) => {
+        element.textContent = AXES[i] + ' ' + profile.radar[i] + ' / ' + character.baseline[i];
+      });
+      showView('result');
+      updateProgress(24, '你的心動光譜，完成了');
+      drawRadar(byId('radar'), profile.radar, character.baseline);
+      byId('result-name').focus({ preventScroll: true });
+    }
+
+    /* ===== 9. 原生 Canvas 六邊形雷達圖 ===== */
+    function drawRadar(canvas, values, baseline) {
+      const ctx = canvas.getContext('2d');
+      const point = (index, value) => [360 + Math.sin(index * Math.PI / 3) * 200 * value, 300 - Math.cos(index * Math.PI / 3) * 200 * value];
+      function polygon(points) {
+        ctx.beginPath();
+        points.forEach((value, i) => {
+          const [x, y] = point(i, value);
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+      }
+      ctx.clearRect(0, 0, 720, 610);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#dfd7e7';
+      for (let level = 1; level <= 4; level++) {
+        polygon(Array(6).fill(level / 4));
+        ctx.stroke();
+      }
+      for (let i = 0; i < 6; i++) {
+        ctx.beginPath();
+        ctx.moveTo(360, 300);
+        ctx.lineTo(...point(i, 1));
+        ctx.stroke();
+      }
+      polygon(baseline.map(value => value / 100));
+      ctx.setLineDash([9, 7]);
+      ctx.strokeStyle = '#719b8d';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      polygon(values.map(value => value / 100));
+      const gradient = ctx.createLinearGradient(180, 100, 520, 490);
+      gradient.addColorStop(0, '#ad81c79c');
+      gradient.addColorStop(.6, '#e2a9c278');
+      gradient.addColorStop(1, '#a6d6c978');
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      ctx.strokeStyle = '#9065af';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+      ctx.fillStyle = '#62516e';
+      ctx.font = '26px "Microsoft JhengHei", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      AXES.forEach((label, i) => ctx.fillText(label, ...point(i, 1.28)));
+    }
+
+    /* ===== 10. 分享圖片、複製結果 ===== */
+    function getResultText() {
+      const profile = getProfile();
+      const c = profile.character;
+      return '我的 FF14 理想男朋友是「' + c.name + '」！\n' + c.title + '\n#' + c.tags.join(' #') +
+        '\n\n' + profile.reason + '\n\n隱藏魅力：' + c.charm + '\n相處剖析：' + c.analysis + '\n避雷指南：' + c.warning;
+    }
+
+    async function copyResult() {
+      const text = getResultText();
+      try {
+        await navigator.clipboard.writeText(text);
+        byId('status').textContent = '已複製結果文字。';
+      } catch {
+        const box = byId('manual-copy');
+        box.hidden = false;
+        box.value = text;
+        box.focus();
+        box.select();
+        byId('status').textContent = '請複製下方已選取的結果文字。';
+      }
+    }
+
+    async function downloadResult() {
+      const button = byId('download-button');
+      if (button.disabled) return;
+      button.disabled = true;
+      button.textContent = '正在製作分享卡…';
+      let host;
+      try {
+        if (typeof html2canvas !== 'function') throw new Error('分享套件未載入');
+        const profile = getProfile();
+        host = document.createElement('div');
+        host.style.cssText = 'position:absolute;left:-10000px;top:0;width:720px';
+        host.setAttribute('aria-hidden', 'true');
+        const card = byId('share-card').cloneNode(true);
+        card.classList.add('share-layout');
+        // 移除副本 ID，避免和頁面上的結果元件重複。
+        card.removeAttribute('id');
+        card.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+        host.appendChild(card);
+        document.body.appendChild(host);
+        await card.querySelector('img').decode();
+        drawRadar(card.querySelector('canvas'), profile.radar, profile.character.baseline);
+        await document.fonts.ready;
+        const shot = await html2canvas(card, {
+          backgroundColor: '#fffdfd', scale: 1.5, useCORS: true, allowTaint: false,
+          logging: false, windowWidth: 760, windowHeight: Math.max(1200, card.scrollHeight), scrollX: 0, scrollY: 0
+        });
+        const blob = await new Promise((resolve, reject) => shot.toBlob(value => value ? resolve(value) : reject(new Error('PNG 產生失敗')), 'image/png'));
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'FF14-' + profile.character.key + '.png';
+        link.textContent = '下載分享 PNG';
+        link.click();
+        byId('status').textContent = '圖片已產生，若未自動下載：';
+        byId('status').appendChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 120000);
+      } catch (error) {
+        byId('status').textContent = '分享圖無法產生，請確認網路與角色圖片已載入後重試。';
+        console.error(error);
+      } finally {
+        host?.remove();
+        button.disabled = false;
+        button.textContent = '生成分享圖片';
+      }
+    }
+
+    /* ===== 11. 按鈕事件 ===== */
+    byId('start-button').addEventListener('click', () => { resetQuiz(); showQuestion(); });
+    answerButtons.forEach((button, i) => button.addEventListener('click', () => chooseAnswer(i)));
+    byId('back-button').addEventListener('click', () => {
+      if (busy || questionIndex === 0) return;
+      questionIndex--;
+      answers.length = questionIndex;
+      showQuestion();
+    });
+    byId('restart-button').addEventListener('click', () => {
+      if (!busy && confirm('清除這次答案，重新開始嗎？')) resetQuiz();
+    });
+    byId('tie-a').addEventListener('click', () => chooseTie(0));
+    byId('tie-b').addEventListener('click', () => chooseTie(1));
+    byId('tie-dialog').addEventListener('cancel', event => event.preventDefault());
+    byId('again-button').addEventListener('click', resetQuiz);
+    byId('copy-button').addEventListener('click', copyResult);
+    byId('download-button').addEventListener('click', downloadResult);
+    if (!auditBank().ok) throw new Error('題庫均衡驗證未通過');
+  </script>
+</body>
+</html>
