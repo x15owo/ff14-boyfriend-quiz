@@ -87,9 +87,9 @@
     .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
     .avatar-frame { min-height: 350px; aspect-ratio: 4/5; border-radius: 20px; background: linear-gradient(135deg, #e9e2f4, #deeeeb); overflow: hidden; position: relative; }
     .result-avatar { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: contain; object-position: center bottom; }
-    #result-name { margin: 5px 0 10px; }
-    #result-title { margin-bottom: 12px; font-weight: 700; }
-    #radar { display: block; width: 100%; height: auto; margin-top: 12px; }
+    .result-name { margin: 5px 0 10px; }
+    .result-title { margin-bottom: 12px; font-weight: 700; }
+    .radar-chart { display: block; width: 100%; height: auto; margin-top: 12px; }
     .legend { font-size: .75rem; text-align: center; color: var(--muted); }
     .legend span:first-child { color: #80569f; }
     .legend span:last-child { color: #527e71; }
@@ -102,9 +102,13 @@
     .actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
     #status { text-align: center; margin-top: 15px; color: var(--accent); }
     #manual-copy { width: 100%; min-height: 160px; font: inherit; margin-top: 15px; }
-    .share-layout { width: 720px !important; max-width: none !important; box-shadow: none; border-radius: 0; }
-    .share-layout .result-grid { grid-template-columns: 1fr 1fr !important; }
-    .share-layout .avatar-frame { min-height: 300px !important; }
+    /* 分享副本使用固定尺寸與 Flex，避免截圖套件的 Grid 支援差異。 */
+    .share-layout { width: 720px !important; max-width: none !important; padding: 32px !important; box-shadow: none; border-radius: 0; }
+    .share-layout .result-grid { display: flex; align-items: flex-start; gap: 0; }
+    .share-layout .avatar-frame { flex: 0 0 300px; width: 300px; height: 300px; min-height: 300px !important; aspect-ratio: 1; margin-right: 24px; }
+    .share-layout .result-grid > div:last-child { flex: 1; min-width: 0; }
+    .share-layout .axis-values { display: flex; flex-wrap: wrap; gap: 0; }
+    .share-layout .axis-values > span { width: 50%; font-size: 11px; }
     .share-layout h2 { font-size: 2rem; }
     .share-layout p { font-size: .85rem; }
     @media (max-width: 680px) {
@@ -180,10 +184,10 @@
           <div class="avatar-frame"><img class="result-avatar" id="result-avatar" alt="配對角色"></div>
           <div>
             <p id="result-english" class="eyebrow"></p>
-            <h2 id="result-name" tabindex="-1"></h2>
-            <p id="result-title"></p>
+            <h2 id="result-name" class="result-name" tabindex="-1"></h2>
+            <p id="result-title" class="result-title"></p>
             <div><span id="trait-archetype" class="tag"></span><span id="trait-hidden" class="tag"></span></div>
-            <canvas id="radar" width="720" height="610" role="img" aria-label="六維偏好雷達，數值列於下方"></canvas>
+            <canvas id="radar" class="radar-chart" width="720" height="610" role="img" aria-label="六維偏好雷達，數值列於下方"></canvas>
             <div class="legend"><span>實線：你的偏好</span> ／ <span>虛線：角色基準</span></div>
             <div class="axis-values" id="axis-values">
               <span></span><span></span><span></span><span></span><span></span><span></span>
